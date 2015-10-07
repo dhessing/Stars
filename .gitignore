@@ -9,7 +9,6 @@ pom.xml.asc
 /.nrepl-port
 /resources/public/js
 /resources/public/css/*.min.css
-/resources/public/vendor
 /out
 /.repl
 *.log
