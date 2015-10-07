@@ -3,7 +3,8 @@
             [reagent.session :as session]
             [secretary.core :as secretary :include-macros true]
             [goog.events :as events]
-            [goog.history.EventType :as EventType])
+            [goog.history.EventType :as EventType]
+            [clojure.set])
   (:import goog.History
            [goog.ui IdGenerator]))
 
@@ -263,7 +264,7 @@
                                (-> % .-target .-value) i)}]]
        [:button.btn.btn-danger.col-xs-1
         {:on-click #(swap! app-state remove-player player)}
-        [:i.fa.fa-trash-o]]])]
+        [:i.fa.fa-trash-o.fa-form]]])]
    [:div.btn-toolbar
     [:button.btn.btn-secondary
      {:on-click #(swap! app-state add-player)}
@@ -278,8 +279,8 @@
     [:div.card-deck.m-b-md
      (let [current-player (:player @app-state)]
        (for [[i {:keys [name tiles]}] (indexed (:players @app-state))]
-         ^{:key i}
          (let [current? (= i current-player)]
+           ^{:key i}
            [:div.card (when current? {:style {:border-color "#333"}})
             [:div.card-header
              (if (empty? name)
